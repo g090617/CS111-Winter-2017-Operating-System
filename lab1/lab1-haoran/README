@@ -1,0 +1,21 @@
+This is the submission for lab 1c
+
+I implement profile for lab 1c, basically just create 
+some time struct and then use getrusage to get the 
+user time and system time
+
+This program have several limitations:
+The program can correctly pass all the test case, 
+but can most contain about 100 file descriptors, 
+since the array size is 100
+
+The array size of pipe array is also 100, which
+ means the program can contain 50 pairs of pipes
+
+the command_arg size is 100, for each subcommand, 
+it can contains 100 chunks of shell command
+
+command_info is also an array of 100, indicates 
+that the total number of command information it
+ is able to store is 100
+

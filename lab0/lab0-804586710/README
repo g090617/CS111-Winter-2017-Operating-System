@@ -1,0 +1,44 @@
+lab0.c:
+	In lab0.c, the main thing it does is to take the content
+from the input file to the output file under some specification.
+
+1. Implementation of options
+   In order to read the input and output file argument, we have
+to include the library getopt.h. To use the library, we need to
+create struct for the long option first to specify whether
+those options needs to take arguments or not.
+
+2. Implementation of file reading and writing
+   open(): get the file descriptor
+   close():close a file descriptor
+   dup():copy a file descriptor to STDIN_FILENO
+   read():read according to the file descriptor
+   write():write according to the file descriptor
+
+3. Structure
+   a.Get the option information
+   b.Execute the corresponding options
+
+Makefile:
+1. Compilation of lab0.c
+   Compile the code
+
+2. Check test cases
+   Checked 7 test cases
+
+3. Clean
+   remove all the input and output files created by check,
+   and remove executable file
+
+4. dist
+   tar the source code, Makefile, README and gdb screenshot
+gdb:
+1. Run gdb
+   Simply type "gdb lab0" to start 
+
+2. Execute program via gdb with stack backstrace
+   When it shows the segmentation fault, type "bt full"
+   to get the information of each variables in the stack
+
+3. Set breakpoints through gdb
+   break "Line number"
