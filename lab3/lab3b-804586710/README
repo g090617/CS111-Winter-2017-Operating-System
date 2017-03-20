@@ -1,0 +1,18 @@
+Name: Haoran Zhang
+UID: 804586710
+
+lab3b.py:
+	This is the source code file for lab3b,
+it reads through the csv files and extract useful
+information and output the corresponding error
+message.
+
+Performance: The program takes about 15 seconds
+to finish running. Most of the time is spent 
+in reading and processing the information of
+bitmap and inodes
+
+Makefile:
+execute the program with command 'make run'
+tarball the files with command 'make dist'
+

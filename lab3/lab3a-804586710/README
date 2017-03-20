@@ -1,0 +1,25 @@
+Name: Haoran Zhang
+UID:804586710
+
+lab3a.c:
+	This is the source code file that reads from the disk-image
+file system, creates csv files to store the results in the csv file
+
+Makefile:
+	Makefile compiles the program and tarball the necessary files
+
+Limitation:
+	It takes about 3 minutes for the program to finish mounting 
+the file system and store the output to the csv files.
+    	The main reason that is causing it slowing down is because
+	the system call dprintf, because it was pretty fast when I
+	was trying to print out the result onto the monitor
+	I tried using fprintf but it just give me the incorrect
+	result which I have no idea why.
+
+
+Implementation outline:
+	Part1,2 in different function
+	Part3,4,5,6 in the same function
+	since it is more convenient to directly working on the inodes
+	and directories when we notice whether an inode is free or not.
