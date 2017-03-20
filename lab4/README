@@ -1,0 +1,24 @@
+UID: 804586710
+Name: Haoran Zhang
+
+File description:
+lab4_1.c: 
+source code for part 1, sending the data contained
+from temperature sensor to a log file
+
+lab4_2.c
+source code for part 2, connect to the campus server,
+recieving commands from campus server and respond to 
+server command through socket communication
+
+lab4_3.c
+source code for part 3, connect to campus server,
+setup ssl and tsl communication with the comands and
+data encryted
+
+lab4_1.log lab4_2.log lab4_3.log:
+log files of data from temperature sensor and commands
+from campus server
+
+Makefile:
+Compile source code and tarball the files mentioned above
