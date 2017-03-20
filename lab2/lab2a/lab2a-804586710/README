@@ -1,0 +1,126 @@
+Files included:
+
+lab2_add.c: This is the source code file for multithread testing
+
+t2.sh, test.sh: These are the test cases shell scripts to test
+the lab2_add code
+
+Makefile: Compile source code, test source code, clean up extra
+files and compress necessary files to a tar file
+
+lab2_add-1.png ...threads and iterations required to generate a
+ failure (with and without yields)
+
+lab2_add-2.png … Average time per operation with and without yields.
+
+lab2_add-3.png … Average time per (single threaded) operation vs. 
+the number of iterations.
+
+lab2_add-4.png threads and iterations that can run successfully 
+with yields under each of the three synchronization methods.
+
+lab2_add-5.png Average time per (multi-threaded) operation vs. 
+the number of threads, for all four versions of the add function.
+
+
+
+QUESTION 2.1.1 - causing conflicts:
+Why does it take many iterations before errors are seen?
+Why does a significantly smaller number of iterations so seldom fail?
+
+when the iteration is small, each thread is able to finish its tasks
+in fairly short amount of time before the other threads accessing the
+shared data,therefore the probability to fail is very unlikely. As 
+the iteration increase, it takes longer for threads
+to finish their work thus the probability that threads accessing the 
+same data increase and cause the error
+
+
+QUESTION 2.1.2 - cost of yielding:
+Why are the --yield runs so much slower?  
+Where is the additional time going?  
+Is it possible to get valid per-operation timings if we are using the --yield option?  
+If so, explain how.  If not, explain why not.
+
+Since there are a lot of processes and threads for the scheduler to
+schedule. Each time when we call yield(), the CPU will step through
+each one of these processes to check and this will take a lot of 
+time to run.
+
+No, we are not able to get hte valid per-operation timings
+because each time a thread try to call yield() it needs to check 
+each one of these processes, and there is no way we can tell
+how long does the overhead takes thus we cannot get the 
+valid per-operation timings
+
+
+QUESTION 2.1.3 - measurement errors:
+Why does the average cost per operation drop with increasing iterations?
+If the cost per iteration is a function of the number of iterations, how do we know how 
+many iterations to run (or what the “correct” cost is)?
+
+The overhead before actually executing the program takes a large 
+portion of the total time because we start counting the time 
+before we create threads, and those operations also takes time and
+it may take much longer than running the add operations. But as the
+iteration increase, the portion of the over head for each thread 
+gets smaller, so the program is more efficient since most of 
+the operations and time are spent in the actual work.
+
+
+As I answered above, when the iteration increase, the portion that
+over head of threads takes is getting smaller and smaller, therefore
+to get the correct cose per itereation, we can just pick a very large
+value of iteration number and then find out the cose per iteration
+and that should be very close to the actual number since the fixed 
+cost of the overhead can be ignored.
+
+
+QUESTION 2.1.4 - costs of serialization:
+Why do all of the options perform similarly for low numbers of threads?
+Why do the three protected operations slow down as the number of threads rises?
+Why are spin-locks so expensive for large numbers of threads?
+
+When the number of threads is low, the yielding and locking time are 
+pretty low and pretty much the same, which means the CPU does not 
+need to put the job to the end of the schedule. Therefore, the
+performances are quite similar 
+
+Because when each thread runs into the critical sections, they have to 
+keep checking whether the lock is available to acquire or not since
+there can be only one thread at a time in the critical seciton. All the
+other threads have to wait longer when the number of threads is larger.
+
+Because spin lock takes a lot of CPU time just waiting for the lock
+to become available. Because in __sync_test_and_set() function, 
+each spining thread have to assign the new integer value to the
+value that the current pointer is pointing to and return the old value.
+And assignment operation is expensive when the waiting time gets longer
+, number of threads gets larger and iteration increase  
+
+
+QUESTION 2.2.1 - scalability of Mutex
+Compare the variation in time per protected operation vs the number of threads 
+(for mutex-protected operations) in Part-1 and Part-2, commenting on 
+similarities/differences and offering explanations for them.
+
+When the number of threads increases, the average running time decrease in both
+part-1 and part-2 decrease but the cost per operation increase for both cases
+But the cost per operation for part2 is much higher than the cost per 
+operation in part1 since in part-1 the critical seciton is pretty narrow while
+the critical secitons in part-2 are much wider therefore each each threads wait
+longer.
+
+
+QUESTION 2.2.2 - scalability of spin locks
+Compare the variation in time per protected operation vs the number of threads 
+for Mutex vs Spin locks, commenting on similarities/differences and offering 
+explanations for them.
+
+From the graph lab2_list-4.png and lab2_add-5.png, we can observe that the 
+cost per operation for spin lock varies more than mutex lock does since 
+the curve of spin lock changes as the curve for mutex lock is more 
+stable and smoothy. That is because for mutex, if some other thread is 
+in the critical seciton, it then switch context and wait. For spin lock, 
+instead of switching the context, it just simply spinning in the while loop 
+keep checking the lock and it consumes a lot of CPU cycles while spinning

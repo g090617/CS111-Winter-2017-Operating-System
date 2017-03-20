@@ -1,0 +1,9 @@
+Total: 267 samples
+     160  59.9%  59.9%      160  59.9% slock
+      76  28.5%  88.4%       76  28.5% __strcmp_sse42
+      13   4.9%  93.3%       51  19.1% SortedList_insert
+      12   4.5%  97.8%       56  21.0% SortedList_lookup
+       6   2.2% 100.0%        6   2.2% _init
+       0   0.0% 100.0%      267 100.0% __clone
+       0   0.0% 100.0%      267 100.0% mission
+       0   0.0% 100.0%      267 100.0% start_thread
